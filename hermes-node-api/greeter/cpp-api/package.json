@@ -1,0 +1,15 @@
+{
+  "name": "greeter-cpp-api",
+  "version": "0.0.0",
+  "description": "Node-API demo with C++ node-addon-api",
+  "main": "index.js",
+  "private": true,
+  "gypfile": true,
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "bindings": "~1.5.0",
+    "node-addon-api": "^8.5.0"
+  }
+}
