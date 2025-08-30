@@ -81,14 +81,25 @@ The hermes-cli needs to be built within the VS 2022 environment. Here's the reco
    ```
 
 2. **Then, build hermes-cli from VS Code's integrated terminal:**
-   ```cmd
-   cd hermes-cli
-   mkdir build
-   cd build
-   cmake ..
-   cmake --build . --config Release
+   ```powershell
+   .\build-hermes-cli.ps1
    ```
 
-The PowerShell script will automatically add the hermes-cli build path to your PATH environment variable, so once built, `hermes-cli.exe` will be available from any terminal within VS Code.
+   For verbose output:
+   ```powershell
+   .\build-hermes-cli.ps1 -Verbose
+   ```
 
-> **Note**: Don't try to build hermes-cli from a regular PowerShell prompt - you need the VS 2022 Developer environment that the script provides to have access to CMake and the C++ compiler.
+   To clean and rebuild:
+   ```powershell
+   .\build-hermes-cli.ps1 -Clean
+   ```
+
+The build script will:
+- Check that you're in the VS 2022 Developer environment
+- Create the build directory if needed
+- Run CMake configuration
+- Build hermes-cli in Release mode
+- Test that the executable works
+
+> **Note**: The build script must be run from within the VS 2022 Developer environment that `start-vs-code.ps1` provides.

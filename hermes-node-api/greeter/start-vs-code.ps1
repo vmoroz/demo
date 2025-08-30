@@ -89,11 +89,9 @@ try {
     if (-not (Test-Path $hermesCliBuildPath)) {
         Write-Warning "Hermes CLI build directory does not exist: $hermesCliBuildPath"
         Write-Host "After VS Code launches, you can build hermes-cli using:" -ForegroundColor Yellow
-        Write-Host "  cd hermes-cli" -ForegroundColor Cyan
-        Write-Host "  mkdir build" -ForegroundColor Cyan
-        Write-Host "  cd build" -ForegroundColor Cyan
-        Write-Host "  cmake .." -ForegroundColor Cyan
-        Write-Host "  cmake --build . --config Release" -ForegroundColor Cyan
+        Write-Host "  .\build-hermes-cli.ps1" -ForegroundColor Cyan
+        Write-Host "Or use the verbose mode:" -ForegroundColor Yellow
+        Write-Host "  .\build-hermes-cli.ps1 -Verbose" -ForegroundColor Cyan
     } else {
         Write-VerboseOutput "Hermes CLI build directory exists"
     }
@@ -155,12 +153,8 @@ code "$scriptDir"
         Write-Host "NEXT STEPS:" -ForegroundColor Yellow
         Write-Host "1. VS Code will open with the VS 2022 Developer environment" -ForegroundColor White
         Write-Host "2. Open the integrated terminal in VS Code (Ctrl+`)" -ForegroundColor White
-        Write-Host "3. Build hermes-cli with these commands:" -ForegroundColor White
-        Write-Host "   cd hermes-cli" -ForegroundColor Cyan
-        Write-Host "   mkdir build" -ForegroundColor Cyan
-        Write-Host "   cd build" -ForegroundColor Cyan
-        Write-Host "   cmake .." -ForegroundColor Cyan
-        Write-Host "   cmake --build . --config Release" -ForegroundColor Cyan
+        Write-Host "3. Build hermes-cli with:" -ForegroundColor White
+        Write-Host "   .\build-hermes-cli.ps1" -ForegroundColor Cyan
         Write-Host "4. After building, hermes-cli.exe will be available in your PATH" -ForegroundColor White
     }
     
