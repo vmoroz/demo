@@ -45,6 +45,7 @@ add_executable(hermes-cli
   node_lite_windows.cpp
   string_utils.cpp
   string_utils.h
+  threadsafe_function.cpp
 )
 
 # Add the .def file to export functions
@@ -58,13 +59,11 @@ add_dependencies(hermes-cli download_hermes_package)
 # Link against Hermes library
 target_link_libraries(hermes-cli PRIVATE ${HERMES_LIB})
 
-# Include directories (if headers are available)
-if(EXISTS ${HERMES_INCLUDE_DIR})
-  target_include_directories(hermes-cli PRIVATE
-    ${HERMES_INCLUDE_DIR}/hermes
-    ${HERMES_INCLUDE_DIR}/node-api
-  )
-endif()
+# Include directories
+target_include_directories(hermes-cli PRIVATE
+  ${HERMES_INCLUDE_DIR}/hermes
+  ${HERMES_INCLUDE_DIR}/node-api
+)
 
 # Copy Hermes DLL to output directory
 add_custom_command(TARGET hermes-cli POST_BUILD
