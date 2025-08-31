@@ -152,7 +152,7 @@ napi_value NodeLiteModule::LoadModule(napi_env env) {
       exports = init_exports;
     }
     exports_ = MakeNodeApiRef(env, exports);
-  } else if (module_path_.extension() == ".js") {
+  } else if (module_path_.extension() == ".js" || module_path_.extension() == ".cjs") {
     exports_ = MakeNodeApiRef(env, LoadScriptModule(env));
   } else if (module_path_.extension() == ".node") {
     exports_ = MakeNodeApiRef(env, LoadNativeModule(env));
@@ -363,7 +363,14 @@ fs::path NodeLiteRuntime::ResolveModulePath(
         fs::exists(result)) {
       return result;
     }
+    if (fs::path result = fs::path(fs_module_path).replace_extension(".cjs");
+        fs::exists(result)) {
+      return result;
+    }
     if (fs::path result = fs_module_path / "index.js"; fs::exists(result)) {
+      return result;
+    }
+    if (fs::path result = fs_module_path / "index.cjs"; fs::exists(result)) {
       return result;
     }
     // See if it is a native module.

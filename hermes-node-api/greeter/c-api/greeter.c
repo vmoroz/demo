@@ -9,12 +9,14 @@
     }                                                                          \
   } while (0)
 
+#define YELLOW(text) "\x1b[33m" text "\x1b[0m"
+
 static napi_value SayHello(napi_env env, const napi_callback_info info) {
   size_t argc = 1;
-  napi_value args[1] = {};
+  napi_value args[1] = {0};
   napi_valuetype arg_type = napi_undefined;
-  char name[256] = {};
-  char message[512] = {};
+  char name[256] = {0};
+  char message[512] = {0};
   napi_value result = NULL;
 
   CHECK_STATUS(napi_get_cb_info(env, info, &argc, args, NULL, NULL));
@@ -31,7 +33,7 @@ static napi_value SayHello(napi_env env, const napi_callback_info info) {
   CHECK_STATUS(
       napi_get_value_string_utf8(env, args[0], name, sizeof(name), NULL));
 
-  snprintf(message, sizeof(message), "C: Hello, %s!", name);
+  snprintf(message, sizeof(message), YELLOW("C-API: ") "Hello, %s", name);
 
   CHECK_STATUS(
       napi_create_string_utf8(env, message, NAPI_AUTO_LENGTH, &result));

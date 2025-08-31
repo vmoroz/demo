@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "C:/github/vmoroz/demo/hermes-node-api/greeter/hermes-cli",
+    "files.associations": {
+        "node_api.h": "c"
+    }
+}
