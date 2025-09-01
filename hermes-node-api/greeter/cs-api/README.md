@@ -3,6 +3,11 @@
 
 This demo showcases a simple Node.js native module built using the Node-API C# interface. The module implements a basic greeter function that demonstrates how to create native addons using .NET that work across different JavaScript runtimes.
 
+## Prerequisites
+
+- .NET SDK 8.0
+- Node.js (for npm)
+
 ## Building the Project
 
 To compile the native module, run the following commands in sequence:

@@ -2,6 +2,13 @@
 
 This demo showcases a simple Node.js native module built using the Node-API C++ interface. The module implements a basic greeter function that demonstrates how to create native addons that work across different JavaScript runtimes.
 
+## Prerequisites
+
+- Visual Studio 2019/2022 or equivalent C++ compiler
+- Visual Studio Developer environment (or run from VS Code launched with start-vs-code.ps1)
+- Python 3.11 (required for node-gyp)
+- Node.js (for npm and node-gyp)
+
 ## Building the Project
 
 To compile the native module, run:
