@@ -30,7 +30,7 @@ To set up your development environment with VS 2022 tools and hermes-cli in PATH
 
 > **Note**: Node.js is required for building the demos. Deno and Bun are optional for testing cross-runtime compatibility.
 
-**Tip**:  Use WinGet to isntall the prerequisites:
+**Tip**: Use WinGet to install the prerequisites:
 - **Node.js**: `winget install OpenJS.NodeJS`
 - **Python 3.11**: `winget install Python.Python.3.11`
 - **Deno**: `winget install DenoLand.Deno`
