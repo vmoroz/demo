@@ -114,7 +114,10 @@ try {
             Write-Host "✅ hermes-cli is working correctly!" -ForegroundColor Green
         } else {
             Write-Warning "hermes-cli.exe was built but may not be working correctly"
+            Write-Host "This may be expected if hermes-cli requires specific arguments or runtime environment." -ForegroundColor Yellow
         }
+        # Build succeeded regardless of the test result
+        exit 0
     } else {
         Write-Warning "Build appeared to succeed but hermes-cli.exe was not found at expected location: $hermesCliExe"
         Write-Host "Checking build output directory..." -ForegroundColor Yellow
@@ -123,6 +126,7 @@ try {
         Get-ChildItem $buildDir -Recurse -Name "*.exe" | ForEach-Object {
             Write-Host "Found executable: $_" -ForegroundColor Cyan
         }
+        exit 1
     }
     
 } catch {

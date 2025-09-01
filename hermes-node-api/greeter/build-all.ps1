@@ -18,9 +18,9 @@ function Write-VerboseOutput {
 function Write-SectionHeader {
     param([string]$Section)
     Write-Host ""
-    Write-Host "=" * 60 -ForegroundColor Cyan
+    Write-Host ("=" * 60) -ForegroundColor Cyan
     Write-Host "Building $Section" -ForegroundColor Cyan
-    Write-Host "=" * 60 -ForegroundColor Cyan
+    Write-Host ("=" * 60) -ForegroundColor Cyan
 }
 
 # Function to check if we're in VS Developer environment
@@ -44,7 +44,7 @@ function Build-HermesCli {
     Write-SectionHeader "Hermes CLI"
     
     if (-not (Test-Path "hermes-cli")) {
-        Write-Error "hermes-cli directory not found"
+        Write-Host "❌ hermes-cli directory not found" -ForegroundColor Red
         return $false
     }
     
@@ -54,9 +54,12 @@ function Build-HermesCli {
         if ($Verbose) { $buildArgs += "-Verbose" }
         if ($Clean) { $buildArgs += "-Clean" }
         
-        & ".\build-hermes-cli.ps1" @buildArgs
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to build hermes-cli"
+        # Run the build script and capture exit code
+        & ".\build-hermes-cli.ps1" @buildArgs | Out-Host
+        $exitCode = $LASTEXITCODE
+        
+        if ($exitCode -ne 0) {
+            Write-Host "❌ Failed to build hermes-cli (exit code: $exitCode)" -ForegroundColor Red
             return $false
         }
         Write-Host "✅ Hermes CLI built successfully" -ForegroundColor Green
@@ -73,7 +76,7 @@ function Build-NodeApiModule {
     Write-SectionHeader $ModuleName
     
     if (-not (Test-Path $ModulePath)) {
-        Write-Error "$ModulePath directory not found"
+        Write-Host "❌ $ModulePath directory not found" -ForegroundColor Red
         return $false
     }
     
@@ -95,9 +98,13 @@ function Build-NodeApiModule {
             Write-VerboseOutput "Removed node_modules directory"
         }
         
-        & npm install
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to build $ModuleName"
+        # Run npm install and capture exit code
+        Write-Host "Running: npm install" -ForegroundColor Yellow
+        npm install
+        $exitCode = $LASTEXITCODE
+        
+        if ($exitCode -ne 0) {
+            Write-Host "❌ Failed to build $ModuleName (npm install failed with exit code: $exitCode)" -ForegroundColor Red
             return $false
         }
         Write-Host "✅ $ModuleName built successfully" -ForegroundColor Green
@@ -112,7 +119,7 @@ function Build-CSharpModule {
     Write-SectionHeader "C# API"
     
     if (-not (Test-Path "cs-api")) {
-        Write-Error "cs-api directory not found"
+        Write-Host "❌ cs-api directory not found" -ForegroundColor Red
         return $false
     }
     
@@ -139,18 +146,26 @@ function Build-CSharpModule {
         }
         
         # Install npm dependencies
-        & npm install
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to run npm install for C# API"
+        Write-Host "Running: npm install" -ForegroundColor Yellow
+        npm install
+        $exitCode = $LASTEXITCODE
+        if ($exitCode -ne 0) {
+            Write-Host "❌ Failed to run npm install for C# API (exit code: $exitCode)" -ForegroundColor Red
             return $false
         }
         
         Write-VerboseOutput "Running dotnet publish"
         
         # Build and publish .NET module
-        & dotnet publish
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to build C# API with dotnet publish"
+        Write-Host "Running: dotnet publish" -ForegroundColor Yellow
+        if ($Verbose) {
+            dotnet publish --verbosity normal
+        } else {
+            dotnet publish
+        }
+        $exitCode = $LASTEXITCODE
+        if ($exitCode -ne 0) {
+            Write-Host "❌ Failed to build C# API with dotnet publish (exit code: $exitCode)" -ForegroundColor Red
             return $false
         }
         
@@ -182,20 +197,31 @@ try {
     $buildResults = @()
     $startTime = Get-Date
     
-    # Build all projects
-    $buildResults += @{ Name = "Hermes CLI"; Success = (Build-HermesCli) }
-    $buildResults += @{ Name = "C API"; Success = (Build-NodeApiModule "c-api" "C API") }
-    $buildResults += @{ Name = "C++ API"; Success = (Build-NodeApiModule "cpp-api" "C++ API") }
-    $buildResults += @{ Name = "C# API"; Success = (Build-CSharpModule) }
+    # Build all projects - using explicit variable assignment to avoid output contamination
+    Write-VerboseOutput "Building Hermes CLI..."
+    $hermesResult = Build-HermesCli
+    $buildResults += @{ Name = "Hermes CLI"; Success = $hermesResult }
+    
+    Write-VerboseOutput "Building C API..."
+    $cApiResult = Build-NodeApiModule "c-api" "C API"
+    $buildResults += @{ Name = "C API"; Success = $cApiResult }
+    
+    Write-VerboseOutput "Building C++ API..."
+    $cppApiResult = Build-NodeApiModule "cpp-api" "C++ API"
+    $buildResults += @{ Name = "C++ API"; Success = $cppApiResult }
+    
+    Write-VerboseOutput "Building C# API..."
+    $csApiResult = Build-CSharpModule
+    $buildResults += @{ Name = "C# API"; Success = $csApiResult }
     
     # Report results
     $endTime = Get-Date
     $duration = $endTime - $startTime
     
     Write-Host ""
-    Write-Host "=" * 60 -ForegroundColor Magenta
+    Write-Host ("=" * 60) -ForegroundColor Magenta
     Write-Host "Build Summary" -ForegroundColor Magenta
-    Write-Host "=" * 60 -ForegroundColor Magenta
+    Write-Host ("=" * 60) -ForegroundColor Magenta
     
     $successCount = 0
     foreach ($result in $buildResults) {
