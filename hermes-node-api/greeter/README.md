@@ -20,12 +20,21 @@ To set up your development environment with VS 2022 tools and hermes-cli in PATH
 
 ### Prerequisites
 
-- Visual Studio 2022 with C++ build tools installed
+- Visual Studio 2022 with C++ build tools and .NET 8 SDK installed
 - VS Code installed
 - PowerShell execution policy allows running scripts (see below if needed)
 - Node.js 22.x or 24.x
 - Python 3.11
-- .NET 8.0 SDK
+- Deno (optional)
+- Bun (optional)
+
+> **Note**: Node.js is required for building the demos. Deno and Bun are optional for testing cross-runtime compatibility.
+
+**Tip**:  Use WinGet to isntall the prerequisites:
+- **Node.js**: `winget install OpenJS.NodeJS`
+- **Python 3.11**: `winget install Python.Python.3.11`
+- **Deno**: `winget install DenoLand.Deno`
+- **Bun**: `winget install Oven-sh.Bun`
 
 ### Launch VS Code with Proper Environment
 
