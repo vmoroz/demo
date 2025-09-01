@@ -16,6 +16,8 @@
 
 namespace fs = std::filesystem;
 
+extern std::shared_ptr<node_api_tests::NodeLiteTaskRunner> tsfnTaskRunner;
+
 namespace node_api_tests {
 
 namespace {
@@ -152,7 +154,8 @@ napi_value NodeLiteModule::LoadModule(napi_env env) {
       exports = init_exports;
     }
     exports_ = MakeNodeApiRef(env, exports);
-  } else if (module_path_.extension() == ".js" || module_path_.extension() == ".cjs") {
+  } else if (module_path_.extension() == ".js" ||
+             module_path_.extension() == ".cjs") {
     exports_ = MakeNodeApiRef(env, LoadScriptModule(env));
   } else if (module_path_.extension() == ".node") {
     exports_ = MakeNodeApiRef(env, LoadNativeModule(env));
@@ -256,6 +259,8 @@ std::string NodeLiteModule::ReadModuleFileText(napi_env env) {
 
   std::shared_ptr<NodeLiteTaskRunner> taskRunner =
       std::make_shared<NodeLiteTaskRunner>();
+
+  tsfnTaskRunner = taskRunner;
 
   fs::path exe_path = fs::canonical(argv[0]);
 

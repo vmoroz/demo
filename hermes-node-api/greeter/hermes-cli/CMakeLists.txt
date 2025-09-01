@@ -45,7 +45,7 @@ add_executable(hermes-cli
   node_lite_windows.cpp
   string_utils.cpp
   string_utils.h
-#  threadsafe_function.cpp
+  threadsafe_function.cpp
 )
 
 # Add the .def file to export functions
