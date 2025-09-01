@@ -34,12 +34,12 @@ function Test-VSEnvironment {
 try {
     Write-Host "Building hermes-cli..." -ForegroundColor Yellow
     
-    # Get the script directory
+    # Get the script directory (which is now the hermes-cli directory)
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     Write-VerboseOutput "Script directory: $scriptDir"
     
-    # Calculate paths
-    $hermesCliDir = Join-Path $scriptDir "hermes-cli"
+    # Calculate paths (script is now in hermes-cli directory)
+    $hermesCliDir = $scriptDir
     $buildDir = Join-Path $hermesCliDir "build"
     $releaseDir = Join-Path $buildDir "bin\Release"
     $hermesCliExe = Join-Path $releaseDir "hermes-cli.exe"
@@ -63,7 +63,7 @@ try {
     
     Write-VerboseOutput "Visual Studio Developer environment detected"
     
-    # Navigate to hermes-cli directory
+    # Navigate to hermes-cli directory (which is the current script directory)
     Set-Location $hermesCliDir
     Write-VerboseOutput "Changed to hermes-cli directory"
     
@@ -129,6 +129,6 @@ try {
     Write-Error "An error occurred during build: $($_.Exception.Message)"
     exit 1
 } finally {
-    # Return to original directory
+    # Return to hermes-cli directory (script directory)
     Set-Location $scriptDir
 }
