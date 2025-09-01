@@ -1,16 +1,23 @@
 # Greeter Demo for React Universe 2025
 
-This folder contains greeter implementations using different APIs to demonstrate Hermes integration with Node.js.
+This folder contains greeter implementations using different APIs to demonstrate that Node-API modukes can be shared across differen JS runtme and JS engines.
 
 ## Quick Start with VS Code
 
 To set up your development environment with VS 2022 tools and hermes-cli in PATH, use the provided PowerShell script:
+
+```
+.\start-vs-code.ps1
+```
 
 ### Prerequisites
 
 - Visual Studio 2022 with C++ build tools installed
 - VS Code installed
 - PowerShell execution policy allows running scripts (see below if needed)
+- Node.js 22.x or 24.x
+- Pythin 3.11
+- .Net 8.0 SDK
 
 ### Launch VS Code with Proper Environment
 
@@ -68,6 +75,7 @@ If you prefer to set up the environment manually:
 - `c-api/` - C API implementation
 - `cpp-api/` - C++ API implementation  
 - `cs-api/` - C# API implementation
+- `common/` - shared files
 - `hermes-cli/` - Hermes CLI tool for running JavaScript with Hermes engine
 - `start-vs-code.ps1` - PowerShell script for environment setup
 
@@ -81,6 +89,7 @@ The hermes-cli needs to be built within the VS 2022 environment. Here's the reco
    ```
 
 2. **Then, build hermes-cli from VS Code's integrated terminal:**
+TODO: please go to the hermes-cli folder first
    ```powershell
    .\build-hermes-cli.ps1
    ```
