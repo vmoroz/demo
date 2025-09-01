@@ -1,14 +1,22 @@
 # Greeter Demo for React Universe 2025
 
-This folder contains greeter implementations using different APIs to demonstrate that Node-API modukes can be shared across differen JS runtme and JS engines.
+This folder contains greeter implementations using different APIs to demonstrate that Node-API modules can be shared across different JavaScript runtimes and engines.
+
+## Project Structure
+
+- **[c-api/](c-api/README.md)** - Node-API C implementation
+- **[cpp-api/](cpp-api/README.md)** - Node-API C++ implementation  
+- **[cs-api/](cs-api/README.md)** - Node-API C# implementation
+- **[hermes-cli/](hermes-cli/README.md)** - Hermes CLI tool for running JavaScript with Hermes engine
+- **[common/](common/README.md)** - Shared utility files used across demos
+- `start-vs-code.ps1` - PowerShell script for environment setup
+- `build-all.ps1` - PowerShell script to build all demo projects
+
+Each demo folder contains its own README with specific build instructions and prerequisites.
 
 ## Quick Start with VS Code
 
-To set up your development environment with VS 2022 tools and hermes-cli in PATH, use the provided PowerShell script:
-
-```
-.\start-vs-code.ps1
-```
+To set up your development environment with VS 2022 tools and hermes-cli in PATH, use the provided PowerShell script.
 
 ### Prerequisites
 
@@ -16,8 +24,8 @@ To set up your development environment with VS 2022 tools and hermes-cli in PATH
 - VS Code installed
 - PowerShell execution policy allows running scripts (see below if needed)
 - Node.js 22.x or 24.x
-- Pythin 3.11
-- .Net 8.0 SDK
+- Python 3.11
+- .NET 8.0 SDK
 
 ### Launch VS Code with Proper Environment
 
@@ -70,45 +78,58 @@ If you prefer to set up the environment manually:
    code .
    ```
 
-## Project Structure
+### Build All Demos
 
-- `c-api/` - C API implementation
-- `cpp-api/` - C++ API implementation  
-- `cs-api/` - C# API implementation
-- `common/` - shared files
-- `hermes-cli/` - Hermes CLI tool for running JavaScript with Hermes engine
-- `start-vs-code.ps1` - PowerShell script for environment setup
+After launching VS Code with the proper environment, you can build all demo projects at once:
 
-## Building hermes-cli
+```powershell
+.\build-all.ps1
+```
 
-The hermes-cli needs to be built within the VS 2022 environment. Here's the recommended workflow:
+For verbose output:
+```powershell
+.\build-all.ps1 -Verbose
+```
+
+To clean and rebuild everything:
+```powershell
+.\build-all.ps1 -Clean
+```
+
+The build script will automatically build all four demo projects:
+- Hermes CLI
+- C API demo
+- C++ API demo  
+- C# API demo
+
+## Building hermes-cli (Individual Build)
+
+If you need to build only hermes-cli, it needs to be built within the VS 2022 environment. See the [hermes-cli README](hermes-cli/README.md) for detailed build instructions.
+
+**Quick build steps:**
 
 1. **First, launch VS Code with the proper environment:**
    ```powershell
    .\start-vs-code.ps1
    ```
 
-2. **Then, build hermes-cli from VS Code's integrated terminal:**
-TODO: please go to the hermes-cli folder first
+2. **Navigate to hermes-cli folder and build:**
    ```powershell
+   cd hermes-cli
    .\build-hermes-cli.ps1
    ```
 
-   For verbose output:
-   ```powershell
-   .\build-hermes-cli.ps1 -Verbose
-   ```
-
-   To clean and rebuild:
-   ```powershell
-   .\build-hermes-cli.ps1 -Clean
-   ```
-
-The build script will:
-- Check that you're in the VS 2022 Developer environment
-- Create the build directory if needed
-- Run CMake configuration
-- Build hermes-cli in Release mode
-- Test that the executable works
-
 > **Note**: The build script must be run from within the VS 2022 Developer environment that `start-vs-code.ps1` provides.
+
+## Running the Demos
+
+After building the projects (either with `.\build-all.ps1` or individually), each demo can be run with multiple JavaScript runtimes:
+
+- **Node.js**: `node .\hello.cjs`
+- **Hermes CLI**: `hermes-cli.exe .\hello.cjs`
+- **Deno**: `deno --allow-read --allow-env --allow-ffi .\hello.cjs`
+- **Bun**: `bun .\hello.cjs`
+
+Navigate to any demo folder (c-api, cpp-api, cs-api) and run these commands to test cross-runtime compatibility.
+
+> **Tip**: For specific build instructions for each demo, see their respective README files linked in the Project Structure section above.
