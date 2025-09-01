@@ -5,6 +5,7 @@
     <PublishAot>true</PublishAot>
     <PublishNodeModule>true</PublishNodeModule>
     <PublishDir>build</PublishDir>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,24 +10,14 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 EXTERN_C_START
 
 void PrintModuleInfo() {
-  // Get the current process's file path
   char exePath[MAX_PATH];
-  if (GetModuleFileNameA(NULL, exePath, MAX_PATH)) {
-    std::cout << YELLOW("Current EXE: ") << exePath << std::endl;
-  } else {
-    std::cerr << "Failed to retrieve the EXE file name. Error: "
-              << GetLastError() << std::endl;
-  }
+  GetModuleFileNameA(NULL, exePath, MAX_PATH);
+  std::cout << YELLOW("Current EXE: ") << exePath << std::endl;
 
-  // Get the DLL's file path
   char dllPath[MAX_PATH];
-  if (GetModuleFileNameA(
-          reinterpret_cast<HINSTANCE>(&__ImageBase), dllPath, MAX_PATH)) {
-    std::cout << YELLOW("Current DLL: ") << dllPath << std::endl;
-  } else {
-    std::cerr << "Failed to retrieve the DLL file name. Error: "
-              << GetLastError() << std::endl;
-  }
+  GetModuleFileNameA(
+      reinterpret_cast<HINSTANCE>(&__ImageBase), dllPath, MAX_PATH);
+  std::cout << YELLOW("Current DLL: ") << dllPath << std::endl;
 }
 
 // DLL entry point - called automatically when DLL is loaded/unloaded

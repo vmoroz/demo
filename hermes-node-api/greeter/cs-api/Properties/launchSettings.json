@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "greeter": {
+      "commandName": "Project",
+      "commandLineArgs": ".\\hello.cjs",
+      "workingDirectory": "C:\\github\\vmoroz\\demo\\hermes-node-api\\greeter\\cs-api",
+      "nativeDebugging": true
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "node.exe",
+      "commandLineArgs": ".\\hello.cjs",
+      "workingDirectory": "C:\\github\\vmoroz\\demo\\hermes-node-api\\greeter\\cs-api",
+      "nativeDebugging": true
+    }
+  }
+}

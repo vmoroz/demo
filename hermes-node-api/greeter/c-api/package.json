@@ -2,12 +2,9 @@
   "name": "greeter-c-api",
   "version": "0.0.0",
   "description": "Node-API demo with C-API",
-  "main": "index.js",
+  "main": "hello.cjs",
   "private": true,
   "gypfile": true,
-  "scripts": {
-    "test": "node index.js"
-  },
   "dependencies": {
     "bindings": "~1.5.0"
   }
