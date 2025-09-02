@@ -25,3 +25,14 @@ static napi_value Init(napi_env env, napi_value exports) {
 }
 
 NAPI_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+// NAPI_MODULE(NODE_GYP_MODULE_NAME, Init) is expanded to
+//
+// NAPI_MODULE_EXPORT int32_t node_api_module_get_api_version_v1() {
+//   return NAPI_VERSION;
+// }
+//
+// NAPI_MODULE_EXPORT napi_value napi_register_module_v1(
+//     napi_env env, napi_value exports) {
+//   return Init(env, exports);
+// }
