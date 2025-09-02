@@ -1,0 +1,7 @@
+{
+  "name": "common",
+  "version": "0.0.0",
+  "description": "Node-API demo common utils",
+  "private": true,
+  "type": "commonjs"
+}

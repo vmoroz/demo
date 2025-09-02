@@ -1,0 +1,10 @@
+{
+  "name": "greeter-csharp-api",
+  "version": "0.0.0",
+  "description": "Node-API demo with C# node-api-dotnet",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "bindings": "~1.5.0"
+  }
+}

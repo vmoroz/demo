@@ -1,0 +1,33 @@
+# Build output directories
+build/
+bin/
+lib/
+
+# NuGet packages
+packages/
+
+# Visual Studio files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+.vs/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake
+
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.pdb
+*.exp
+*.iobj
+*.ipdb
+
+# OS generated files
+.DS_Store
+Thumbs.db
