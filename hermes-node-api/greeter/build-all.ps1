@@ -238,10 +238,10 @@ try {
         Write-Host ""
         Write-Host "🎉 All projects built successfully!" -ForegroundColor Green
         Write-Host "You can now test the demos with different JavaScript runtimes:" -ForegroundColor Yellow
-        Write-Host "  • node .\hello.cjs" -ForegroundColor White
-        Write-Host "  • hermes-cli.exe .\hello.cjs" -ForegroundColor White
-        Write-Host "  • deno --allow-read --allow-env --allow-ffi .\hello.cjs" -ForegroundColor White
-        Write-Host "  • bun .\hello.cjs" -ForegroundColor White
+        Write-Host "  • node .\hello.js" -ForegroundColor White
+        Write-Host "  • hermes-cli.exe .\hello.js" -ForegroundColor White
+        Write-Host "  • deno --allow-read --allow-env --allow-ffi .\hello.js" -ForegroundColor White
+        Write-Host "  • bun .\hello.js" -ForegroundColor White
         exit 0
     } else {
         Write-Host ""

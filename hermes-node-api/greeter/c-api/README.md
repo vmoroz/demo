@@ -25,22 +25,22 @@ Once built, you can run the demo with any of the following JavaScript runtimes:
 
 ### Node.js
 ```
-node .\hello.cjs
+node .\hello.js
 ```
 
 ### Hermes CLI
 ```
-hermes-cli.exe .\hello.cjs
+hermes-cli.exe .\hello.js
 ```
 
 ### Deno
 ```
-deno --allow-read --allow-env --allow-ffi .\hello.cjs
+deno --allow-read --allow-env --allow-ffi .\hello.js
 ```
 
 ### Bun
 ```
-bun .\hello.cjs
+bun .\hello.js
 ```
 
 ## What it does
@@ -56,5 +56,5 @@ The demo creates a simple greeter module that:
 
 - `greeter.c` - The C source code implementing the native module
 - `binding.gyp` - Build configuration for node-gyp
-- `hello.cjs` - JavaScript entry point that loads and uses the native module
+- `hello.js` - JavaScript entry point that loads and uses the native module
 - `package.json` - Project metadata and dependencies

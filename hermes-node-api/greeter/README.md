@@ -134,10 +134,10 @@ If you need to build only hermes-cli, it needs to be built within the VS 2022 en
 
 After building the projects (either with `.\build-all.ps1` or individually), each demo can be run with multiple JavaScript runtimes:
 
-- **Node.js**: `node .\hello.cjs`
-- **Hermes CLI**: `hermes-cli.exe .\hello.cjs`
-- **Deno**: `deno --allow-read --allow-env --allow-ffi .\hello.cjs`
-- **Bun**: `bun .\hello.cjs`
+- **Node.js**: `node .\hello.js`
+- **Hermes CLI**: `hermes-cli.exe .\hello.js`
+- **Deno**: `deno --allow-read --allow-env --allow-ffi .\hello.js`
+- **Bun**: `bun .\hello.js`
 
 Navigate to any demo folder (c-api, cpp-api, cs-api) and run these commands to test cross-runtime compatibility.
 
